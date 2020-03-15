@@ -1,0 +1,29 @@
+dist: bionic
+cache:
+  bundler: true
+  directories:
+  - cache/
+notifications:
+  email: false
+language: c
+compiler: gcc
+before_install:
+- sudo apt install automake autoconf gettext git make libncurses5-dev libreadline-dev
+  zlib1g-dev liblzo2-dev libssl-dev texinfo -y
+addons:
+  apt:
+    update: true
+install:
+- autoreconf -fsi
+- ./configure
+script:
+- make dist
+deploy:
+  provider: releases
+  api_key:
+    secure: 02vXdwWcvYhHaVN22XnSHOZ4ot8rFt6XjzHZCM0537jjHvTGRcReo+OKtjlYomEoZHaosSTWDDBN43k+x6iwQ+xYqn+8OxgrKKc4UVv0IIMcM3hNWs2x4PMUUD8s4X1HXQrVrR9rAk231KQnSVYGsrMyu4P9H2MNoPHAgFuIK/vt0sDpaY26Yk/kKHbGSw6Z4fF30D1jY0WEv0lOgI0kP2y72oXhZsGi+cGTBdXw7EtHGnoPyGSqGIvYgt5JISMvNwP1detfbMRcIyXhEqJF7zke1x2uOsBgKNEMaI/aJmgQLaf8Co9tegQFK8bk9e3t7aiYfuuANZjJNZsFqdUrW0kBgZlchF0acrfGb4ZOHYoajNFmfsrotj6n3Wcxp7lxS6ulz1ZaCjlxe6D768YJmWE9bBZRPfLk75CpWj0M3IsP3wsDULjGxbbizrLw1xvFkzhnLR+qJbSGf3sgIkFtWGRN2aVdbT3Ae2XfjaqGSMOUEp1iHhkhOMtAp9yzEKTJehSvwglZ00O9NuXJSe5y1r3dusv8fsjWK2Ts/jB+irp1DalNipV0Iz0kuSITaQOcH4+qimO6/Ll4nuyP2LAKsA7uZE4SyaN3MR78unnVNYoDDN6k8lZOcVDJCw+50JPkMNRxWUp6JZFisTN2Ogl31ICaGuN8A1DZxGZIgFBmreo=
+  file_glob: true
+  file: tinc-1.1*.tar.gz
+  skip_cleanup: true
+  on:
+    branch: l1.1

@@ -1,6 +1,7 @@
 .*
 !.gitignore
 !.astylerc
+!.travis.yml
 *.a
 *.dirstamp
 *.o
